@@ -1,0 +1,19 @@
+[project]
+name = "marlo-mcp"
+version = "0.1.0"
+description = "Marlo MCP client"
+requires-python = ">=3.12"
+authors = [
+    {email= "mka@marlo.online", name= "Mathan Karthik"}
+]
+license = {file = "LICENSE"}
+readme = {file = "README.md"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "httpx>=0.28.1"
+    "mcp[cli]>=1.10.1",
+]
