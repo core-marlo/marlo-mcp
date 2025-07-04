@@ -1,6 +1,18 @@
-# Marlo MCP Client
+A Python client for interacting with the Marlo MCP (Model Context Protocol) server. This package provides an async client for making authenticated requests to the MCP API and includes example tools for vessel data retrieval.
 
-A Python client for interacting with the Marlo MCP (Maritime Control Platform) server. This package provides an async client for making authenticated requests to the MCP API, and includes example tools for vessel data retrieval.
+## What is Marlo?
+Marlo is a finance and operations platform designed for maritime and shipping companies.
+
+Marlo helps shipping businesses manage their entire operations from a single platform. It offers tools for:
+- Voyage Management: Plan routes, track progress, and log updates for each voyage.
+- Banking: Manage accounts in multiple currencies, send and receive payments, and access maritime-focused banking features like global accounts and borderless cards.
+- Loans & Finance: Request and track loans for cargo contracts, demurrage, and other financing needs. It also helps monitor covenants and keep financial records in order.
+- Analytics: View up-to-date financial and operational data in one dashboard, including cashflow, valuations, and credit scores.
+- Accounting: Sync with accounting software to maintain accurate financial records.
+- Email Integration: Centralize all chartering and operations emails with filters and tags for easy sorting.
+- Risk & Compliance: Track compliance, screen counterparties against global sanctions lists, monitor loan terms, and manage carbon intensity and emissions reporting.
+
+Marlo is designed for various roles in the maritime industry, including CEOs, CFOs, chartering managers, operations managers, accountants, vessel owners, operators, and commercial managers. Its goal is to simplify operations, ensure compliance, and help maritime businesses grow.
 
 ## Features
 - Async HTTP client for Marlo MCP API
@@ -44,7 +56,7 @@ The Marlo MCP client provides the following tools:
 
 ## Usage
 
-![Example usage of Marlo MCP Client](marlo_mcp/marlo_claude_example.png)
+![Example usage of Marlo MCP Client](https://raw.githubusercontent.com/core-marlo/marlo-mcp/main/marlo_mcp/marlo_claude_example.png)
 
 ## 🔑 License
 [MIT](LICENSE)
