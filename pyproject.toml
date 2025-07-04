@@ -1,19 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "marlo-mcp"
-version = "0.1.0"
-description = "Marlo MCP client"
+version = "0.1.7"
+description = "A Python client for interacting with the Marlo MCP (Maritime Control Platform) server. This package provides an async client for making authenticated requests to the MCP API, and includes example tools for vessel data retrieval. It can be used as an MCP server for Claude Desktop and other MCP-compatible clients."
 requires-python = ">=3.12"
 authors = [
     {email= "mka@marlo.online", name= "Mathan Karthik"}
 ]
 license = {file = "LICENSE"}
-readme = {file = "README.md"}
+readme = {file = "README.md", content-type = "text/markdown"}
+keywords = ["mcp", "maritime", "marlo", "voyage management", "api", "client", "async"]
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "httpx>=0.28.1"
+    "httpx>=0.28.1",
     "mcp[cli]>=1.10.1",
 ]
+
+[project.urls]
+Homepage = "https://www.marlo.co/"
+Repository = "https://github.com/core-marlo/marlo-mcp.git"
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "twine>=6.1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["marlo_mcp"]
+
+[project.scripts]
+marlo-mcp = "marlo_mcp.main:main"
+marlo-mcp-main = "marlo_mcp.main:main"

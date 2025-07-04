@@ -9,22 +9,9 @@ A Python client for interacting with the Marlo MCP (Maritime Control Platform) s
 
 ## Requirements
 - Python 3.12+
+- uvx [guide](https://docs.astral.sh/uv/getting-started/installation/)
 - [httpx](https://www.python-httpx.org/) (installed automatically)
 - [mcp[cli]](https://pypi.org/project/mcp/) (installed automatically)
-
-## Installation
-
-Clone this repository and install dependencies:
-
-```bash
-pip install -e .
-```
-
-Or, if you just want to install dependencies:
-
-```bash
-pip install httpx>=0.28.1 mcp[cli]>=1.10.1
-```
 
 ## 🔌 MCP Setup
 
@@ -34,14 +21,8 @@ here the example use for consume the mcp server
 {
     "mcpServers": {
         "marlo-mcp": {
-            "command": "uv",
-            "args": ["run", 
-            "--with",
-            "mcp[cli]",
-            "mcp",
-            "run",
-            "PATH/TO/main.py"
-            ],
+            "command": "uvx",
+            "args": ["marlo-mcp"],
             "env": {
                 "MARLO_MCP_API_KEY": "<your-api-key>"
             }
@@ -63,7 +44,7 @@ The Marlo MCP client provides the following tools:
 
 ## Usage
 
-![Example usage of Marlo MCP Client](marlo_claude_example.png)
+![Example usage of Marlo MCP Client](marlo_mcp/marlo_claude_example.png)
 
 ## 🔑 License
 [MIT](LICENSE)

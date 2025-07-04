@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include main.py
+include marlo_claude_example.png
+include pyproject.toml
+recursive-include marlo_mcp * 
