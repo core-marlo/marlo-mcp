@@ -53,6 +53,7 @@ The Marlo MCP client provides the following tools:
 
 - `get_vessels`: Get all available vessels
 - `get_vessel_details`: Get details of a specific vessel
+- `create_vessel`: Create a new vessel in your fleet
 
 ## Usage
 

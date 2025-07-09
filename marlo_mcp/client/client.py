@@ -71,4 +71,22 @@ class MarloMCPClient:
             return response.json()
         except httpx.HTTPStatusError as e:
             raise MarloMCPError(f"HTTP error occurred: {e}")
+    
+    async def post(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Make a POST request to the specified endpoint with the given data.
         
+        Args:
+            endpoint (str): The path of the endpoint to request.
+            data (Dict[str, Any]): The data to send in the request body.
+            
+        Returns:
+            dict: The JSON response from the server.
+        """
+        if not self._client:
+            raise MarloMCPError("Client not initialized. Ensure you are using the client in an async context.")
+        try:
+            response = await self._client.post(f"/{endpoint.lstrip('/')}", json=data)
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPStatusError as e:
+            raise MarloMCPError(f"HTTP error occurred: {e}")
