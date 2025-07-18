@@ -13,6 +13,7 @@ Marlo helps shipping businesses manage their entire operations from a single pla
 - Risk & Compliance: Track compliance, screen counterparties against global sanctions lists, monitor loan terms, and manage carbon intensity and emissions reporting.
 
 Marlo is designed for various roles in the maritime industry, including CEOs, CFOs, chartering managers, operations managers, accountants, vessel owners, operators, and commercial managers. Its goal is to simplify operations, ensure compliance, and help maritime businesses grow.
+To subscribe to Marlo or request a demo, simply email our team at [support@marlo.online](mailto:support@marlo.online). We're happy to help you get started!
 
 ## Features
 - Async HTTP client for Marlo MCP API
@@ -54,10 +55,17 @@ The Marlo MCP client provides the following tools:
 - `get_vessels`: Get all available vessels
 - `get_vessel_details`: Get details of a specific vessel
 - `create_vessel`: Create a new vessel in your fleet
+- `create_estimate_sheet`: Create a new estimate sheet
+- `calculate_voyage_estimate`: Calculate voyage estimate
+- `search_ports`: Search for ports
+- `search_cargos`: Search for cargos
+- `search_charterer_contacts`: Search for charterer contacts
+- `get_all_charter_specialists`: Get all available charter specialists
 
 ## Usage
 
 ![Example usage of Marlo MCP Client](https://raw.githubusercontent.com/core-marlo/marlo-mcp/main/marlo_mcp/marlo_claude_example.png)
 
 ## 🔑 License
-[MIT](LICENSE)
+[MIT](LICENSE) © 2025 Marlo
+

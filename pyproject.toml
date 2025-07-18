@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "marlo-mcp"
-version = "0.1.12"
+version = "0.1.13"
 description = "A Python client for interacting with the Marlo MCP (Model Context Protocol) server. This package provides an async client for making authenticated requests to the MCP API, and includes example tools for vessel data retrieval. It can be used as an MCP server for Claude Desktop and other MCP-compatible clients."
 requires-python = ">=3.12"
 authors = [
