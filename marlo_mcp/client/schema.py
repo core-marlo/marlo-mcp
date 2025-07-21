@@ -1144,7 +1144,7 @@ class BasePortItinerarySchema(BaseModel):
     demurrage_despatch_days: Optional[float] = 0.0
     demurrage_rate_per_day: Optional[float] = 0.0
     despatch_rate_per_day: Optional[float] = 0.0
-    distance_from_previous_port: float = Field(..., description="Distance from previous port")
+    distance_from_previous_port: float = Field(..., description="Distance from previous port in nautical miles")
     draft: Optional[float] = 0.0
     draft_unit: Optional[str] = None
     eca_miles: Optional[float] = 0.0
@@ -1157,8 +1157,8 @@ class BasePortItinerarySchema(BaseModel):
     is_no_of_extra_sea_days_updated: Optional[bool] = False
     is_port_days_updated: Optional[bool] = None
     lat: Optional[str] = None
-    load_discharge_quantity: Optional[float] = 0.0
-    load_discharge_rate: Optional[float] = 0.0
+    load_discharge_quantity: Optional[float] = Field(..., description="Load or discharge quantity")
+    load_discharge_rate: Optional[float] = Field(..., description="Load or discharge rate")
     load_discharge_rate_unit: Optional[str] = "Per Day"
     load_line: Optional[str] = None
     lon: Optional[str] = None
