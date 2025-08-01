@@ -1902,3 +1902,10 @@ class TcoCveModelSchema(BaseCveModel):
 class TciCveModelSchema(BaseCveModel):
     from_date: Optional[datetime] = None
     to_date: Optional[datetime] = None
+
+
+class VoyageProfitAndLoss(BaseModel):
+    end_date: Optional[str] = Field(..., description="Voyage end date format YYYY-MM-DD")
+    project_id: Optional[str] = Field(..., description="Voyage project id get from voyage details")
+    start_date: Optional[str] = Field(..., description="Voyage start date format YYYY-MM-DD")
+    voyage_id: Optional[str] = Field(..., description="Voyage id")

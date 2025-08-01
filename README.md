@@ -52,15 +52,31 @@ mcp install PATH/TO/main.py -v MARLO_MCP_API_KEY=<your-api-key>
 ## Available tools
 The Marlo MCP client provides the following tools:
 
-- `get_vessels`: Get all available vessels
+- `get_vessels`: Get all available vessels with minimal vessel details
 - `get_vessel_details`: Get details of a specific vessel
-- `create_vessel`: Create a new vessel in your fleet
-- `create_estimate_sheet`: Create a new estimate sheet
-- `calculate_voyage_estimate`: Calculate voyage estimate
-- `search_ports`: Search for ports
+- `create_vessel`: Create a new vessel
+- `search_ports`: Search multiple ports
 - `search_cargos`: Search for cargos
-- `search_charterer_contacts`: Search for charterer contacts
 - `get_all_charter_specialists`: Get all available charter specialists
+- `search_charterer_contacts`: Search for charterer contacts
+- `get_all_voyages`: Get all voyages
+- `get_voyage_details`: Get details of a specific voyage
+- `get_voyage_profit_and_loss`: Get voyage profit and loss
+- `get_all_estimates_sheet`: Get all estimates sheet
+- `get_estimate_sheet_details`: Get details of a specific estimate sheet
+- `get_all_cargo_books`: Get all cargo books
+- `get_cargo_book_details`: Get details of a specific cargo book
+- `list_all_vessel_fixtures`: List all vessel fixtures
+- `get_vessel_fixture_details`: Get details of a specific vessel fixture
+- `get_voyage_contacts`: Get voyage contacts
+- `get_voyage_contacts_financial_details`: Get financial details for voyage contacts
+- `get_vessel_fixture_contacts`: Get contacts for a vessel fixture
+- `get_vessel_fixture_contacts_financial_details`: Get financial details for vessel fixture contacts
+- `get_invoice_details`: Get invoice details
+- `get_bill_details`: Get bill details
+- `voyage_port_disbursements`: Get voyage port disbursements
+- `get_voyage_laytime`: Get voyage laytime
+- `list_all_customers`: List all customers
 
 ## Usage
 
