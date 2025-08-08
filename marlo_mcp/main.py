@@ -3,7 +3,7 @@ from uuid import UUID
 from mcp.server.fastmcp import FastMCP
 
 from marlo_mcp.client import MarloMCPClient
-from marlo_mcp.client.schema import CreateEstimateSheetSchema, CreateVesselSchema, EstimateRequestSchema, VoyageProfitAndLoss
+from marlo_mcp.client.schema import BillQueryParams, CreateEstimateSheetSchema, CreateVesselSchema, EstimateRequestSchema, ListInvoiceParams, VoyageProfitAndLoss
 
 mcp = FastMCP("marlo-mcp")
 
@@ -177,10 +177,116 @@ async def get_voyage_laytime(voyage_id: UUID):
 
 
 @mcp.tool(description="list all customers")
-async def list_all_customers():
+async def list_all_customers(page: int = 1, per_page: int = 100, search: str = None):
     """List all customers"""
     async with MarloMCPClient() as client:
-        return await client.get("customers")
+        return await client.get("customers", params={"page": page, "per_page": per_page, "search": search})
+
+
+@mcp.tool(description="list all vendors")
+async def list_all_vendors(page: int = 1, per_page: int = 100, search: str = None):
+    """List all vendors"""
+    async with MarloMCPClient() as client:
+        return await client.get("vendors", params={"page": page, "per_page": per_page, "search": search})
+
+
+@mcp.tool(description="list all lendors")
+async def list_all_lendors(page: int = 1, per_page: int = 100, search: str = None):
+    """List all lendors"""
+    async with MarloMCPClient() as client:
+        return await client.get("lendors", params={"page": page, "per_page": per_page, "search": search})
+
+
+@mcp.tool(description="get customer details")
+async def get_customer_details(customer_id: str):
+    """Get customer details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"customer/{customer_id}")
+
+
+@mcp.tool(description="get vendor details")
+async def get_vendor_details(vendor_id: str):
+    """Get vendor details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"vendor/{vendor_id}")
+
+
+@mcp.tool(description="list all bills")
+async def list_all_bills(data: BillQueryParams):
+    """List all bills"""
+    async with MarloMCPClient() as client:
+        return await client.get("bills", params=data.model_dump())
+
+
+@mcp.tool(description="list all invoices")
+async def list_all_invoices(data: ListInvoiceParams):
+    """List all invoices"""
+    async with MarloMCPClient() as client:
+        return await client.get("invoices", params=data.model_dump())
+
+
+@mcp.tool(description="get journal entries")
+async def get_journal_entries():
+    """Get journal entries"""
+    async with MarloMCPClient() as client:
+        return await client.get("journal-entries")
+
+
+@mcp.tool(description="list all vendor credits")
+async def list_all_vendor_credits():
+    """List all vendor credits"""
+    async with MarloMCPClient() as client:
+        return await client.get("vendor-credit-notes")
+
+
+@mcp.tool(description="get vendor credit details")
+async def get_vendor_credit_details(vendor_credit_id: str):
+    """Get vendor credit details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"vendor-credit-notes/{vendor_credit_id}")
+
+
+@mcp.tool(description="list all credit notes")
+async def list_all_credit_notes():
+    """List all credit notes"""
+    async with MarloMCPClient() as client:
+        return await client.get("credit-notes")
+
+
+@mcp.tool(description="get credit note details")
+async def get_credit_note_details(credit_note_id: str):
+    """Get credit note details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"credit-notes/{credit_note_id}")
+
+
+@mcp.tool(description="list all exteral loans")
+async def list_all_external_loans():
+    """List all external loans"""
+    async with MarloMCPClient() as client:
+        return await client.get("external-loans")
+
+
+@mcp.tool(description="get external loan details")
+async def get_external_loan_details(application_id: str):
+    """Get external loan details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"external-loans/{application_id}")
+
+
+@mcp.tool(description="list all marlo loans")
+async def list_all_marlo_loans():
+    """List all marlo loans"""
+    async with MarloMCPClient() as client:
+        return await client.get("loans")
+
+
+@mcp.tool(description="get marlo loan details")
+async def get_marlo_loan_details(application_id: str):
+    """Get marlo loan details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"loans/{application_id}")
+
 
 
 def main():

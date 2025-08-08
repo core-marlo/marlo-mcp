@@ -77,6 +77,20 @@ The Marlo MCP client provides the following tools:
 - `voyage_port_disbursements`: Get voyage port disbursements
 - `get_voyage_laytime`: Get voyage laytime
 - `list_all_customers`: List all customers
+- `list_all_vendors`: List all vendors
+- `list_all_lendors`: List all lendors
+- `get_customer_details`: Get customer details
+- `get_vendor_details`: Get vendor details
+- `list_all_bills`: List all bills
+- `list_all_invoices`: List all invoices
+- `get_journal_entries`: Get journal entries
+- `list_all_vendor_credits`: List all vendor credits
+- `get_vendor_credit_details`: Get vendor credit details
+- `list_all_credit_notes`: List all credit notes
+- `get_credit_note_details`: Get credit note details
+- `list_all_external_loans`: List all external loans
+- `get_external_loan_details`: Get external loan details
+- `list_all_marlo_loans`: List all marlo loans
 
 ## Usage
 

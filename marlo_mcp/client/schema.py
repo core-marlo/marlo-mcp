@@ -1909,3 +1909,95 @@ class VoyageProfitAndLoss(BaseModel):
     project_id: Optional[str] = Field(..., description="Voyage project id get from voyage details")
     start_date: Optional[str] = Field(..., description="Voyage start date format YYYY-MM-DD")
     voyage_id: Optional[str] = Field(..., description="Voyage id")
+
+
+class BillQueryParams(BaseModel):
+    """Parameters for querying bills with proper field descriptions and default values"""
+    
+    status: Optional[str] = Field(
+        None, 
+        description="Status of the bills to filter by"
+    )
+    page: str = Field(
+        default="1",
+        description="Page number for pagination",
+        alias="page"
+    )
+    per_page: str = Field(
+        default="20",
+        description="Number of records per page",
+        alias="per_page"
+    )
+    project_id: Optional[str] = Field(
+        None,
+        description="ID of the project to filter bills by"
+    )
+    number: Optional[str] = Field(
+        None,
+        description="Bill number to filter by"
+    )
+    vendor_name: Optional[str] = Field(
+        None,
+        description="Vendor name to filter bills by"
+    )
+    client_status: Optional[str] = Field(
+        None,
+        description="Client status to filter by"
+    )
+    search_key: Optional[str] = Field(
+        None,
+        description="Search keyword for filtering bills"
+    )
+    field_name: str = Field(
+        default="",
+        description="Column name to sort the bills by",
+        alias="field_name"
+    )
+    order: str = Field(
+        default="",
+        description="Sort order ('asc' or 'desc')",
+        alias="order"
+    )
+    expense_status: Optional[str] = Field(
+        None,
+        description="Expense status to filter bills by"
+    )
+    sort: Optional[str] = Field(
+        None,
+        description="Sorting method to apply"
+    )
+    vendor_id: Optional[str] = Field(
+        None,
+        description="Vendor ID to filter bills by"
+    )
+    type: Optional[str] = Field(
+        None,
+        description="Type of bills to filter by"
+    )
+
+    class Config:
+        """Pydantic model configuration"""
+        json_schema_extra = {
+            "example": {
+                "status": "active",
+                "page": "1",
+                "per_page": "20",
+                "field_name": "created_at",
+                "order": "desc"
+            }
+        }
+
+
+class ListInvoiceParams(BaseModel):
+    client_status: Optional[str] = None
+    project_id: Optional[str] = None
+    status_id: Optional[str] = None
+    status: Optional[str] = None
+    client_id: Optional[str] = None
+    sort: Optional[str] = None
+    page: Optional[str] = Field("", alias="page")
+    per_page: Optional[str] = Field("", alias="per_page")
+    filter: Optional[str] = None
+    field_name: Optional[str] = None
+    order: Optional[str] = None
+    type: Optional[str] = None
