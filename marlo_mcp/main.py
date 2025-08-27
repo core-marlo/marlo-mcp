@@ -22,7 +22,7 @@ async def get_vessel_details(vessel_id: UUID):
         return await client.get(f"vessel/{vessel_id}")
 
 
-@mcp.tool(description="create a new vessel")
+# @mcp.tool(description="create a new vessel")
 async def create_vessel(vessel: CreateVesselSchema):
     """Create a new vessel"""
     async with MarloMCPClient() as client:
