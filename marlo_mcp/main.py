@@ -1,9 +1,10 @@
+from typing import Optional
 from uuid import UUID
 
 from mcp.server.fastmcp import FastMCP
 
 from marlo_mcp.client import MarloMCPClient
-from marlo_mcp.client.schema import BillQueryParams, CreateEstimateSheetSchema, CreateVesselSchema, EstimateRequestSchema, ListInvoiceParams, VoyageProfitAndLoss
+from marlo_mcp.client.schema import BillQueryParams, CreateVesselSchema, ListInvoiceParams, SearchInputData, VoyageProfitAndLoss
 
 mcp = FastMCP("marlo-mcp")
 
@@ -139,7 +140,6 @@ async def get_vessel_fixture_contacts(vessel_fixture_id: UUID):
     """Get contacts for a vessel fixture"""
     async with MarloMCPClient() as client:
         return await client.get(f"time-chartered/{vessel_fixture_id}/contacts")
-
 
 
 @mcp.tool(description="Get vessel fixture contacts financial details (bills, invoices, payments, etc.)")
@@ -297,7 +297,8 @@ async def get_market_rates():
     """
     async with MarloMCPClient() as client:
         return await client.get(f"market-rates")
-    
+
+
 @mcp.tool(description="get market rate details")
 async def get_market_rate_details(api_identifier: str):
     """
@@ -319,6 +320,7 @@ async def get_covenant():
     async with MarloMCPClient() as client:
         return await client.get(f"covenant")
     
+
 @mcp.tool(description="get credit score")
 async def get_credit_score():
     """
@@ -327,6 +329,7 @@ async def get_credit_score():
     async with MarloMCPClient() as client:
         return await client.get(f"credit-score")
 
+
 @mcp.tool(description="get interest rates")
 async def get_interest_rates():
     """
@@ -334,6 +337,33 @@ async def get_interest_rates():
     """
     async with MarloMCPClient() as client:
         return await client.get(f"interest-rates")
+
+
+@mcp.tool(description="list all sanctions case manager")
+async def list_all_sanctions_case_manager(page: int, per_page: int, schema: Optional[str] = None):
+    """List all sanctions case manager"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"list-sanction-case-manager", params={"page": page, "per_page": per_page, "schema": schema})
+
+
+@mcp.tool(description="get sanctions case manager details")
+async def get_sanctions_case_manager_details(source_id: str):
+    """Get sanctions case manager details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"sanction-case-manager", params={"source_id": source_id})
+
+
+@mcp.tool(description="search sanctions")
+async def search_sanctions(request: SearchInputData):
+    """Search sanctions"""
+    async with MarloMCPClient() as client:
+        return await client.post(f"sanctions", data=request.model_dump())
+
+@mcp.tool(description="search individual sanction")
+async def search_individual_sanction(source_id: str):
+    """Search individual sanction"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"sanction/{source_id}")
 
 
 def main():

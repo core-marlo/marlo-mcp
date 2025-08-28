@@ -96,6 +96,11 @@ The Marlo MCP client provides the following tools:
 - `get_covenant`: Get covenant
 - `get_credit_score`: Get credit score
 - `get_interest_rates`: List all interest rates
+- `list_all_sanctions_case_manager`: List all sanctions case manager
+- `get_sanctions_case_manager_details`: Get sanctions case manager details
+- `search_sanctions`: Search sanctions
+- `search_individual_sanction`: Search individual sanction
+
 ## Usage
 
 ![Example usage of Marlo MCP Client](https://raw.githubusercontent.com/core-marlo/marlo-mcp/main/marlo_mcp/marlo_claude_example.png)

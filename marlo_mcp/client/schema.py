@@ -2001,3 +2001,26 @@ class ListInvoiceParams(BaseModel):
     field_name: Optional[str] = None
     order: Optional[str] = None
     type: Optional[str] = None
+
+
+class SearchInput(BaseModel):
+    name: str
+    type_of_schema: Optional[Literal["Vessel", "Person", "Company", "Organization", "LegalEntity", "PublicBody"]]
+    data: str = "default"
+    birthdate: Optional[str] = ""
+    nationality: Optional[str] = ""
+    flag: Optional[str] = ""
+    imo_number: Optional[str] = ""
+    type: str = ""
+    company_id: str = ""
+    jurisdiction: Optional[str] = ""
+    registrationNumber: Optional[str] = ""
+    country: Optional[str] = ""
+    legalForm: Optional[str] = ""
+    status: Optional[str] = ""
+    address: Optional[str] = ""
+    incorporationdate: Optional[str] = ""
+
+
+class SearchInputData(BaseModel):
+    data: SearchInput
