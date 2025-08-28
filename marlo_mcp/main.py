@@ -22,7 +22,7 @@ async def get_vessel_details(vessel_id: UUID):
         return await client.get(f"vessel/{vessel_id}")
 
 
-# @mcp.tool(description="create a new vessel")
+@mcp.tool(description="create a new vessel")
 async def create_vessel(vessel: CreateVesselSchema):
     """Create a new vessel"""
     async with MarloMCPClient() as client:
@@ -139,6 +139,7 @@ async def get_vessel_fixture_contacts(vessel_fixture_id: UUID):
     """Get contacts for a vessel fixture"""
     async with MarloMCPClient() as client:
         return await client.get(f"time-chartered/{vessel_fixture_id}/contacts")
+
 
 
 @mcp.tool(description="Get vessel fixture contacts financial details (bills, invoices, payments, etc.)")
@@ -287,6 +288,52 @@ async def get_marlo_loan_details(application_id: str):
     async with MarloMCPClient() as client:
         return await client.get(f"loans/{application_id}")
 
+
+@mcp.tool(description="get market rates")
+async def get_market_rates():
+    """
+    Fetch Market rates.
+
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(f"market-rates")
+    
+@mcp.tool(description="get market rate details")
+async def get_market_rate_details(api_identifier: str):
+    """
+    Fetch Market rate details.
+    
+    Parameters:
+    - api_identifier: The identifier of the market rate (e.g., 'IDS9SQAME2W2VRO93ON6HOL9TOI04E7S')
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(f"market-rates/{api_identifier}")
+
+
+@mcp.tool(description="get covenant")
+async def get_covenant():
+    """
+    Fetch Covenant.
+
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(f"covenant")
+    
+@mcp.tool(description="get credit score")
+async def get_credit_score():
+    """
+    Fetch Credit Score
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(f"credit-score")
+
+@mcp.tool(description="get interest rates")
+async def get_interest_rates():
+    """
+    Fetch Interest Rates
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(f"interest-rates")
 
 
 def main():
