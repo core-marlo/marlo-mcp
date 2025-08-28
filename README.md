@@ -91,7 +91,11 @@ The Marlo MCP client provides the following tools:
 - `list_all_external_loans`: List all external loans
 - `get_external_loan_details`: Get external loan details
 - `list_all_marlo_loans`: List all marlo loans
-
+- `get_market_rates`: List all market rates
+- `get_market_rate_details`: Get market rate details
+- `get_covenant`: Get covenant
+- `get_credit_score`: Get credit score
+- `get_interest_rates`: List all interest rates
 ## Usage
 
 ![Example usage of Marlo MCP Client](https://raw.githubusercontent.com/core-marlo/marlo-mcp/main/marlo_mcp/marlo_claude_example.png)
