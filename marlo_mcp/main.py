@@ -1,10 +1,11 @@
 from typing import Optional
 from uuid import UUID
+from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
 from marlo_mcp.client import MarloMCPClient
-from marlo_mcp.client.schema import BillQueryParams, CreateVesselSchema, ListInvoiceParams, SearchInputData, VoyageProfitAndLoss
+from marlo_mcp.client.schema import BillQueryParams, CreateVesselSchema, ListInvoiceParams, SearchInputData, VoyageProfitAndLoss, VesselValuationRequestSchema
 
 mcp = FastMCP("marlo-mcp")
 
@@ -14,6 +15,20 @@ async def get_vessels():
     """Get all available vessels"""
     async with MarloMCPClient() as client:
         return await client.get("vessels")
+
+
+@mcp.tool(description="Get all available fleets")
+async def get_fleets():
+    """Get all available fleets"""
+    async with MarloMCPClient() as client:
+        return await client.get("fleets")
+
+
+@mcp.tool(description="Get fleet details")
+async def get_fleet_details(fleet_id: UUID):
+    """Get details of a specific fleet"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"fleet/{fleet_id}")
 
 
 @mcp.tool(description="Get vessel details")
@@ -364,6 +379,121 @@ async def search_individual_sanction(source_id: str):
     """Search individual sanction"""
     async with MarloMCPClient() as client:
         return await client.get(f"sanction/{source_id}")
+
+@mcp.tool(description="list all bank accounts")
+async def list_all_bank_accounts():
+    """List all bank accounts"""
+    async with MarloMCPClient() as client:
+        return await client.get("bank-accounts")
+
+
+@mcp.tool(description="list all bank transactions")
+async def list_all_bank_transactions(
+    bank_id: str,
+    status: Optional[str] = None,
+    date_range: Optional[str] = None,
+    amount_min: Optional[float] = None,
+    amount_max: Optional[float] = None,
+    base_type: Optional[list[str]] = None,
+    search: Optional[str] = None,
+    currency_code: Optional[str] = None,
+    page: int = 1,
+    per_page: int = 10
+):
+    """List all bank transactions with optional filters and pagination
+    
+    Args:
+        bank_id: Bank account ID (required). Use list_all_bank_accounts to get available bank IDs
+        status: Filter by status (MATCHED, UNMATCHED)
+        date_range: Date range in format yyyy-MM-dd,yyyy-MM-dd
+        amount_min: Minimum amount filter
+        amount_max: Maximum amount filter
+        base_type: Filter by base_type (DEBIT, CREDIT). Multiple values allowed
+        search: Search term to filter transactions by (searches in transaction, invoice, bill fields)
+        currency_code: Filter by currency code (e.g., USD, EUR)
+        page: Page number (default 1)
+        per_page: Items per page (default 10, max 100)
+    """
+    async with MarloMCPClient() as client:
+        params = {
+            "page": page,
+            "per_page": per_page,
+            "bank_id": bank_id
+        }
+        
+        if status:
+            params["status"] = status
+        if date_range:
+            params["date_range"] = date_range
+        if amount_min is not None:
+            params["amount_min"] = amount_min
+        if amount_max is not None:
+            params["amount_max"] = amount_max
+        if base_type:
+            params["base_type"] = base_type
+        if search:
+            params["search"] = search
+        if currency_code:
+            params["currency_code"] = currency_code
+            
+        return await client.get("bank-transactions", params=params)
+
+
+@mcp.tool(description="get profit and loss data")
+async def get_profit_loss(
+    period_length: str,
+    periods_to_compare: str,
+    start_month: str
+):
+    """Get profit and loss data with specified parameters
+    
+    Args:
+        period_length: Length of each period (e.g., "1" for monthly)
+        periods_to_compare: Number of periods to compare (e.g., "6" for 6 months)
+        start_month: Starting month in format "MMM YYYY" (e.g., "Aug 2025")
+    """
+    async with MarloMCPClient() as client:
+        payload = {
+            "periodLength": period_length,
+            "periodsToCompare": periods_to_compare,
+            "startMonth": start_month
+        }
+        return await client.post("profit-loss", data=payload)
+
+
+@mcp.tool(description="get balance sheet data")
+async def get_balance_sheet(
+    period_length: str,
+    periods_to_compare: str,
+    start_month: str
+):
+    """Get balance sheet data with specified parameters
+    
+    Args:
+        period_length: Length of each period (e.g., "1" for monthly)
+        periods_to_compare: Number of periods to compare (e.g., "6" for 6 months)
+        start_month: Starting month in format "MMM YYYY" (e.g., "Aug 2025")
+    """
+    async with MarloMCPClient() as client:
+        payload = {
+            "periodLength": period_length,
+            "periodsToCompare": periods_to_compare,
+            "startMonth": start_month
+        }
+        return await client.post("balance-sheet", data=payload)
+
+@mcp.tool(description="Get a global search vessel valuation list")
+async def get_global_search_vessel_list():
+    """Get a global search vessel valuation list"""
+    async with MarloMCPClient() as client:
+        return await client.get("/global-vessel-search-list")
+
+
+@mcp.tool(description="Get vessel valuation")
+async def get_vessel_valuation(data: VesselValuationRequestSchema):
+    """Get vessel valuation using DCF method"""
+    async with MarloMCPClient() as client:
+        return await client.post("vessel-valuation", data=data.model_dump())
 
 
 def main():

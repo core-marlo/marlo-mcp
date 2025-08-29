@@ -2024,3 +2024,22 @@ class SearchInput(BaseModel):
 
 class SearchInputData(BaseModel):
     data: SearchInput
+
+
+class VesselValuationVesselSchema(BaseModel):
+    name: str = Field(..., description="Vessel name")
+    imo: str = Field(..., description="Vessel IMO number")
+    vessel_type: Optional[str] = Field("", description="Vessel type")
+    size_dwt: Optional[str] = Field("", description="Vessel size in DWT")
+    built_date: Optional[str] = Field("", description="Vessel built date")
+    charter_method: Optional[str] = Field("", description="Charter method")
+
+
+class VesselValuationOtherSchema(BaseModel):
+    imo: int = Field(..., description="Vessel IMO number")
+    scrap_price: Optional[float] = Field(250, description="Scrap price")
+
+
+class VesselValuationRequestSchema(BaseModel):
+    dcf: VesselValuationVesselSchema = Field(..., description="DCF vessel information")
+    other: VesselValuationOtherSchema = Field(..., description="Other vessel information")
