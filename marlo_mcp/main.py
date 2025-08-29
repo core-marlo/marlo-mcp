@@ -540,6 +540,35 @@ async def get_company_valuation():
         return await client.get("/company-valuation")
     
     
+@mcp.tool(description="Get operational cashflow data")
+async def get_operational_cashflow(
+    period_length: str,
+    periods_to_compare: str,
+    start_month: str
+):
+    """Get operational cashflow data with specified parameters
+    
+    Args:
+        period_length: Length of each period (e.g., "1" for monthly)
+        periods_to_compare: Number of periods to compare (e.g., "6" for 6 months)
+        start_month: Starting month in format "MMM YYYY" (e.g., "Aug 2025")
+    """
+    async with MarloMCPClient() as client:
+        payload = {
+            "periodLength": period_length,
+            "periodsToCompare": periods_to_compare,
+            "startMonth": start_month
+        }
+        return await client.post("operational-cashflow", data=payload)
+
+
+@mcp.tool(description="Get cashbalance streams data")
+async def get_cashbalance_streams():
+    """Get cashbalance streams data"""
+    async with MarloMCPClient() as client:
+        return await client.get("cashbalance-streams")
+
+
 def main():
     mcp.run()
 
