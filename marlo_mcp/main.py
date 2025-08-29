@@ -303,6 +303,12 @@ async def get_marlo_loan_details(application_id: str):
     async with MarloMCPClient() as client:
         return await client.get(f"loans/{application_id}")
 
+@mcp.tool(description="List all transactions")
+async def list_all_transactions():
+    """List all transactions"""
+    async with MarloMCPClient() as client:
+        return await client.get("/transactions")
+
 
 @mcp.tool(description="get market rates")
 async def get_market_rates():
@@ -496,6 +502,44 @@ async def get_vessel_valuation(data: VesselValuationRequestSchema):
         return await client.post("vessel-valuation", data=data.model_dump())
 
 
+@mcp.tool(description="List approval transactions")
+async def list_approval_transactions():
+    """List approval transactions"""
+    async with MarloMCPClient() as client:
+        return await client.get("/approval-transactions")
+
+
+@mcp.tool(description="Get a global account currency balance")
+async def get_global_account_currency_balance():
+    """Get a global account currency balance"""
+    async with MarloMCPClient() as client:
+        return await client.get("/balances/current")
+
+@mcp.tool(description="List all global accounts")
+async def list_all_global_accounts():
+    """List all global accounts"""
+    async with MarloMCPClient() as client:
+        return await client.get("/list-global-accounts")
+
+@mcp.tool(description="List all payouts")
+async def list_all_payouts():
+    """List all payouts"""
+    async with MarloMCPClient() as client:
+        return await client.get("/list-payouts")
+
+@mcp.tool(description="Get payout details")
+async def get_payout_details(payout_id: str):
+    """Get payout details"""
+    async with MarloMCPClient() as client:
+        return await client.get(f"/payout/{payout_id}")
+
+@mcp.tool(description="Get a valuation of company")
+async def get_company_valuation():
+    """Get a valuation of company"""
+    async with MarloMCPClient() as client:
+        return await client.get("/company-valuation")
+    
+    
 def main():
     mcp.run()
 
