@@ -100,6 +100,20 @@ The Marlo MCP client provides the following tools:
 - `get_sanctions_case_manager_details`: Get sanctions case manager details
 - `search_sanctions`: Search sanctions
 - `search_individual_sanction`: Search individual sanction
+- `list_all_bank_accounts`: List all bank accounts
+- `list_all_bank_transactions`: List all bank transactions
+- `get_profit_loss`: Get profit and loss data
+- `get_balance_sheet`: Get balance sheet data
+- `get_global_search_vessel_list`: Get a global search vessel list
+- `get_vessel_valuation`: Get vessel valuation
+- `list_approval_transactions`: List approval transactions
+- `get_global_account_currency_balance`: Get a global account currency balance
+- `list_all_global_accounts`: List all global accounts
+- `list_all_payouts`: List all payouts
+- `get_payout_details`: Get payout details
+- `get_company_valuation`: Get a valuation of company
+- `get_operational_cashflow`: Get operational cashflow data
+- `get_cashbalance_streams`: Get cashbalance streams data
 
 ## Usage
 

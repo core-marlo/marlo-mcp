@@ -380,11 +380,13 @@ async def search_sanctions(request: SearchInputData):
     async with MarloMCPClient() as client:
         return await client.post(f"sanctions", data=request.model_dump())
 
+
 @mcp.tool(description="search individual sanction")
 async def search_individual_sanction(source_id: str):
     """Search individual sanction"""
     async with MarloMCPClient() as client:
         return await client.get(f"sanction/{source_id}")
+
 
 @mcp.tool(description="list all bank accounts")
 async def list_all_bank_accounts():
@@ -488,6 +490,7 @@ async def get_balance_sheet(
         }
         return await client.post("balance-sheet", data=payload)
 
+
 @mcp.tool(description="Get a global search vessel valuation list")
 async def get_global_search_vessel_list():
     """Get a global search vessel valuation list"""
@@ -515,11 +518,13 @@ async def get_global_account_currency_balance():
     async with MarloMCPClient() as client:
         return await client.get("/balances/current")
 
+
 @mcp.tool(description="List all global accounts")
 async def list_all_global_accounts():
     """List all global accounts"""
     async with MarloMCPClient() as client:
         return await client.get("/list-global-accounts")
+
 
 @mcp.tool(description="List all payouts")
 async def list_all_payouts():
@@ -527,17 +532,20 @@ async def list_all_payouts():
     async with MarloMCPClient() as client:
         return await client.get("/list-payouts")
 
+
 @mcp.tool(description="Get payout details")
 async def get_payout_details(payout_id: str):
     """Get payout details"""
     async with MarloMCPClient() as client:
         return await client.get(f"/payout/{payout_id}")
 
+
 @mcp.tool(description="Get a valuation of company")
 async def get_company_valuation():
     """Get a valuation of company"""
     async with MarloMCPClient() as client:
         return await client.get("/company-valuation")
+
 
 @mcp.tool(description="Get operational cashflow data")
 async def get_operational_cashflow(

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "marlo-mcp"
-version = "0.1.18"
+version = "0.1.19"
 description = "Marlo MCP server for voyage management system for shipping companies"
 requires-python = ">=3.12"
 authors = [
@@ -28,17 +28,31 @@ classifiers = [
 dependencies = [
     "httpx>=0.28.1",
     "mcp[cli]>=1.10.1",
+    "pydantic>=2.0.0",
+    "python-dateutil>=2.8.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2.2.post1",
+    "twine>=6.1.0",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "ruff>=0.4.0",
+    "black>=24.0.0",
+    "mypy>=1.8.0",
+]
+
+docs = [
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.5.10",
 ]
 
 [project.urls]
 Homepage = "https://www.marlo.co/"
 Repository = "https://github.com/core-marlo/marlo-mcp.git"
-
-[dependency-groups]
-dev = [
-    "build>=1.2.2.post1",
-    "twine>=6.1.0",
-]
+Documentation = "https://github.com/core-marlo/marlo-mcp#readme"
+Changelog = "https://github.com/core-marlo/marlo-mcp/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["marlo_mcp"]
