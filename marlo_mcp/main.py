@@ -567,7 +567,38 @@ async def get_cashbalance_streams():
     async with MarloMCPClient() as client:
         return await client.get("cashbalance-streams")
 
-    
+
+@mcp.tool(description="Get lender dashboard statistics including aggregated data and per-borrower company stats")
+async def get_lender_dashboard_stats(lender_contact_id: str, lender_company_id: str):
+    """
+    Get lender dashboard statistics including aggregated data and per-borrower company stats.
+
+    Args:
+        lender_contact_id: The lender contact's ID
+        lender_company_id: The lender's company ID
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(
+            "lender-dashboard-stats",
+            params={"lender_contact_id": lender_contact_id, "lender_company_id": lender_company_id}
+        )
+
+
+@mcp.tool(description="Get detailed lender dashboard information for a specific borrower company")
+async def get_lender_dashboard_detail(borrower_company_id: str):
+    """
+    Get detailed lender dashboard information for a specific borrower company.
+
+    Args:
+        borrower_company_id: The borrower's company ID
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(
+            "lender-dashboard-detail",
+            params={"borrower_company_id": borrower_company_id}
+        )
+
+
 def main():
     mcp.run()
 
