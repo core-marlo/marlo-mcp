@@ -576,6 +576,7 @@ async def get_cashbalance_streams():
         return await client.get("cashbalance-streams")
 
 
+
 @mcp.tool(description="Get lender dashboard statistics including aggregated data and per-borrower company stats")
 async def get_lender_dashboard_stats(lender_contact_id: str, lender_company_id: str):
     """
