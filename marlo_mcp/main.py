@@ -575,6 +575,157 @@ async def get_cashbalance_streams():
     async with MarloMCPClient() as client:
         return await client.get("cashbalance-streams")
 
+@mcp.tool(description="Get summary of all borrowers with their loan statistics and portfolio totals")
+async def get_all_borrowers_summary_for_lender():
+    """
+    Get summary of all borrowers with their loan statistics and portfolio totals.
+
+    **What this tool does**:
+    Returns a complete list of all borrower companies with aggregated statistics for the lender's
+    entire loan portfolio including total amounts, vessel counts, alerts, and risk metrics.
+
+    **Use this tool to**:
+    - List all borrower companies the lender has loaned to
+    - See total loan amount across all borrowers ($ formatted)
+    - Count total active/outstanding loans
+    - View total vessels (fleet size) across all borrowers
+    - Check alerts by severity level (Low, Medium, High)
+    - Get portfolio-level metrics (rating, risk concentration)
+    - Obtain borrower company IDs for detailed queries
+
+    **Authentication**: Uses authenticated lender's credentials from token (automatic).
+
+    **Response includes**:
+    ```
+    {
+      "total_loan_amount": "$10,500,000.00",
+      "total_loans": 15,
+      "total_vessels": 8,
+      "alerts": {"low": 2, "medium": 3, "high": 1},
+      "borrower_companies": [
+        {
+          "company_id": "abc123",  // Use this ID for get_lender_dashboard_detail
+          "company_name": "Marine Shipping Co",
+          "status": "Active",
+          "loan_count": 3,
+          "vessel_count": 2,
+          "vessel_valuation": "$5,200,000",
+          "ltv_ratio": "65%",
+          "outstanding_amount": "$3,380,000",
+          "outstanding_dues": {
+            "loan_id_1": {"principal": 1000000, "interest": 50000, "fees": 5000},
+            "loan_id_2": {"principal": 2000000, "interest": 100000, "fees": 10000}
+          },
+          "covenant_violations": 0
+        }
+      ],
+      "portfolio_rating": "A",
+      "high_risk_concentration": "12%"
+    }
+    ```
+
+    **Next step**: Use `company_id` from any borrower to call `get_borrower_financial_details_for_lender(company_id)`
+    for comprehensive financial analysis.
+
+    **Returns**: Complete borrower list with portfolio-level aggregations
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(
+            "lender/all-borrowers-summary"
+        )
+
+
+@mcp.tool(description="Get comprehensive financial analysis and loan details for a specific borrower company")
+async def get_borrower_financial_details_for_lender(borrower_company_id: str):
+    """
+    Get comprehensive financial analysis and loan details for a specific borrower company.
+
+    **What this tool does**:
+    Provides deep financial metrics, credit analysis, vessel-by-vessel loan breakdown,
+    and contact information for a single borrower company.
+
+    **IMPORTANT - How to get borrower_company_id**:
+    1. First call: `get_all_borrowers_summary_for_lender()`
+    2. From the response, find the borrower in the `borrower_companies` array
+    3. Extract the `company_id` field from that borrower object
+    4. Use that ID as `borrower_company_id` parameter here
+
+    **Use this tool to**:
+    - Analyze borrower's financial health and creditworthiness
+    - Review loan performance and outstanding amounts
+    - Assess collateral value and LTV ratios
+    - Get vessel-by-vessel loan breakdown
+    - Check covenant compliance and risk level
+    - Access borrower contact information
+    - Monitor changes in financial ratios (LTV, DSCR)
+
+    **Required Parameter**:
+    - `borrower_company_id` (string): The company ID obtained from get_all_borrowers_summary_for_lender
+
+    **Response includes**:
+    ```
+    {
+      // Financial Ratios
+      "ltv_ratio": "65.0%",
+      "ltv_change": "-2.5%",  // Improvement from previous period
+      "dscr": "1.45",  // Debt Service Coverage Ratio
+      "current_ratio": "2.1",  // Current assets / liabilities
+
+      // Credit & Risk
+      "marlo_credit_score": 720,
+      "credit_rating": "A",  // A+, A, B, C, D, or F
+      "risk_profile": "Low Risk",
+
+      // Amounts
+      "total_outstanding": "$3,380,000.00",
+      "external_loan_outstanding": "$500,000.00",
+      "company_valuation": "$5,200,000.00",
+
+      // Company Info
+      "client_contact_details": {
+        "owner_name": "John Smith",
+        "business_type": "Shipping Company",
+        "contact_person": "Jane Doe",
+        "email": "jane@marineshipping.com"
+      },
+
+      // Vessel-level Breakdown
+      "vessels": [
+        {
+          "vessel_id": "v123",
+          "vessel_name": "Pacific Star",
+          "loan_count": 2,
+          "total_loan_amount": "$2,000,000",
+          "loan_status": "Active",
+          "market_value": "$3,000,000",
+          "sanction_status": "Clear",
+          "outstanding_dues": {
+            "principal": 1800000,
+            "interest": 90000,
+            "fees": 10000
+          }
+        }
+      ]
+    }
+    ```
+
+    **Typical workflow**:
+    1. List all borrowers: `get_all_borrowers_summary_for_lender()`
+    2. Select borrower of interest, get their `company_id`
+    3. Get detailed analysis: `get_borrower_financial_details_for_lender(company_id)`
+
+    **Args**:
+        borrower_company_id: The borrower's company ID from get_all_borrowers_summary_for_lender response
+
+    **Returns**: Comprehensive financial analysis with vessel-level loan breakdown
+    """
+    async with MarloMCPClient() as client:
+        return await client.get(
+            "lender/borrower-details",
+            params={"borrower_company_id": borrower_company_id}
+        )
+
+
     
 def main():
     mcp.run()
