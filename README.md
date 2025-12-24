@@ -114,6 +114,8 @@ The Marlo MCP client provides the following tools:
 - `get_company_valuation`: Get a valuation of company
 - `get_operational_cashflow`: Get operational cashflow data
 - `get_cashbalance_streams`: Get cashbalance streams data
+- `get_all_borrowers_summary_for_lender`: Get summary of all borrowers with their loan statistics and portfolio totals
+- `get_borrower_financial_details_for_lender`: Get comprehensive financial analysis and loan details for a specific borrower company
 
 ## Usage
 
