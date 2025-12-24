@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "marlo-mcp"
-version = "0.1.19"
+version = "0.1.20"
 description = "Marlo MCP server for voyage management system for shipping companies"
 requires-python = ">=3.12"
 authors = [
