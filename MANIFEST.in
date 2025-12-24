@@ -3,4 +3,8 @@ include LICENSE
 include main.py
 include marlo_claude_example.png
 include pyproject.toml
-recursive-include marlo_mcp * 
+recursive-include marlo_mcp *
+
+# Exclude deployment scripts from package
+exclude deploy.py
+exclude deploy.sh 

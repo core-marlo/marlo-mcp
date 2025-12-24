@@ -133,4 +133,8 @@ Thumbs.db
 .vscode/
 
 # Lock files
-uv.lock 
+uv.lock
+
+# Deployment scripts (contains sensitive tokens)
+deploy.py
+deploy.sh 
